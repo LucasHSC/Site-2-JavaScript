@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Controle de Fluxo em JavaScript</title>
+    <style>
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button:active {
+            background-color: #1c6ea4;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #ecf0f1;
+            color: #34495e;
+            font-size: 1.1rem;
+            min-height: 50px;
+            white-space: pre-line;
+        }
+
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            button {
+                width: 100%;
+                margin: 10px 0;
+                padding: 15px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Exemplo de Controle de Fluxo em JavaScript</h1>
+
+        <div>
+            <button onclick="exemploIf()">Exemplo If</button>
+            <button onclick="exemploWhile()">Exemplo While</button>
+            <button onclick="exemploSwitch()">Exemplo Switch</button>
+            <button onclick="exemploFor()">Exemplo For</button>
+            <button onclick="exemploLabel()">Exemplo Label</button>
+            <button onclick="exemploTryCatch()">Exemplo Try/Catch</button>
+            <button onclick="alertaClique()">Alerta de Clique</button>
+            <button onclick="confirmacao()">Confirmação</button>
+            <button onclick="imprimirPagina()">Imprimir Página</button>
+        </div>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        
+        function exemploIf() {
+            let hora = new Date().getHours();
+            let saudacao;
+
+            if (hora < 12) {
+                saudacao = "Bom dia!";
+            } else if (hora < 18) {
+                saudacao = "Boa tarde!";
+            } else {
+                saudacao = "Boa noite!";
+            }
+
+            document.getElementById('resultado').innerText = saudacao;
+        }
+
+       
+        function exemploWhile() {
+            let contador = 0;
+            let resultado = "";
+            while (contador < 5) {
+                resultado += "Contagem: " + contador + "\n";
+                contador++;
+            }
+            document.getElementById('resultado').innerText = resultado;
+        }
+
+        
+        function exemploSwitch() {
+            let diaSemana = new Date().getDay();
+            let dia;
+
+            switch (diaSemana) {
+                case 0:
+                    dia = "Domingo";
+                    break;
+                case 1:
+                    dia = "Segunda-feira";
+                    break;
+                case 2:
+                    dia = "Terça-feira";
+                    break;
+                case 3:
+                    dia = "Quarta-feira";
+                    break;
+                case 4:
+                    dia = "Quinta-feira";
+                    break;
+                case 5:
+                    dia = "Sexta-feira";
+                    break;
+                case 6:
+                    dia = "Sábado";
+                    break;
+                default:
+                    dia = "Dia inválido";
+            }
+
+            document.getElementById('resultado').innerText = "Hoje é: " + dia;
+        }
+
+        
+        function exemploFor() {
+            let resultado = "";
+            for (let i = 0; i < 5; i++) {
+                resultado += "Número: " + i + "\n";
+                if (i === 2) {
+                    resultado += "Continue!\n";
+                    continue; 
+                }
+                if (i === 4) {
+                    resultado += "Break!\n";
+                    break; 
+                }
+            }
+            document.getElementById('resultado').innerText = resultado;
+        }
+
+        
+        function exemploLabel() {
+            let resultado = "";
+            loopExterno: for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    if (i === 2 && j === 1) {
+                        resultado += "Saindo do loop!\n";
+                        break loopExterno; // Exemplo de label + break
+                    }
+                    resultado += `i: ${i}, j: ${j}\n`;
+                }
+            }
+            document.getElementById('resultado').innerText = resultado;
+        }
+
+        
+        function exemploTryCatch() {
+            try {
+                let valor = prompt("Digite um número:");
+                if (isNaN(valor)) {
+                    throw "Isso não é um número!"; // Exemplo de throw
+                }
+                document.getElementById('resultado').innerText = "Número digitado: " + valor;
+            } catch (erro) {
+                document.getElementById('resultado').innerText = "Erro: " + erro;
+            }
+        }
+
+        
+        function alertaClique() {
+            alert("Você clicou no botão!");
+        }
+
+        
+        function confirmacao() {
+            let confirmacao = confirm("Você deseja continuar?");
+            if (confirmacao) {
+                document.getElementById('resultado').innerText = "Você confirmou a ação!";
+            } else {
+                document.getElementById('resultado').innerText = "Você cancelou a ação!";
+            }
+        }
+
+        
+        function imprimirPagina() {
+            window.print();
+        }
+
+        
+        window.onload = function() {
+            alert("A página foi carregada com sucesso!");
+        };
+    </script>
+
+</body>
+</html>
